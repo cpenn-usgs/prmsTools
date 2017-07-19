@@ -1,5 +1,5 @@
 calc_WYstats <- function(data, runoffIndex, segOutflowIndex,
-                         writeWYstats = FALSE, outFile)
+                         writeWYstats = FALSE, outFile = NULL)
 {
   # add concatinated date and WY
   data$date <- as.Date(paste(data$year, data$month, data$day, sep = "-"))
@@ -17,5 +17,12 @@ calc_WYstats <- function(data, runoffIndex, segOutflowIndex,
                               rmse = hydroGOF::rmse(sim, obs), 
                               volE = hydroGOF::VE(sim, obs))
   
+  if(writeWYstats == TRUE)
+  {
+    write.table(x = wystats, file = outFile, quote = FALSE, sep = ",", 
+                row.names = FALSE, col.names = TRUE)
+  }
+  
+  return(wystats)
   
 }
