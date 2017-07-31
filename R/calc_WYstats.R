@@ -10,14 +10,17 @@
 #' RMSE: Root Mean Square Error
 #' VE: Volumetric Efficiency
 #' See \code{hydroGOF} package for more documentation and references
-#' @examples 
+#' @examples
+#' \dontrun{
 #' data("exampleData",package="prmsTools")
 #' x <- exampleData
-#' basinStats <- calc_WYstats(data = x, runoffIndex = 6, segOutflowIndex = 9)
+#' basinStats <- calc_WYstats(data = x, runoffIndex = 6, segOutflowIndex = 9)}
 #' @importFrom smwrBase waterYear
 #' @importFrom dplyr summarise
 #' @importFrom dplyr group_by
-#' @importFrom hydroGOF NSE rmse VE
+#' @importFrom hydroGOF NSE
+#' @importFrom hydroGOF rmse
+#' @importFrom hydroGOF VE
 #' @seealso \code{\link[prmsTools]{read_Statvar}}, 
 #' \code{\link[hydroGOF]{NSE}}, \code{\link[hydroGOF]{rmse}}, \code{\link[hydroGOF]{VE}}
 #' @export
@@ -36,11 +39,15 @@ calc_WYstats <- function(data, runoffIndex, segOutflowIndex,
                  paste("seg_outflow", segOutflowIndex, sep = "_"))]
   names(data) <- c("date", "WY", "obs", "sim")
   
-  ### NOT WORKING####
-  wystats <- dplyr::summarise(dplyr::group_by(data, WY), 
-                              nse = hydroGOF::NSE(sim, obs), 
-                              rmse = hydroGOF::rmse(sim, obs), 
-                              volE = hydroGOF::VE(sim, obs))
+  ### calc stats
+  wystats <- dplyr::summarise(dplyr::group_by(data, WY),
+                              nse = 1 - ( sum( (obs - sim)^2 ) / sum( (obs - mean(obs, na.rm = TRUE))^2 )),
+                              rmse = sqrt( mean( (sim - obs)^2, na.rm = TRUE) ),
+                              volE = 1 - ( sum( abs(obs - sim) ) / sum( obs ) ))
+  # wystats <- dplyr::summarise(dplyr::group_by(data, WY), 
+  #                             nse = hydroGOF::NSE(sim, obs), 
+  #                             rmse = hydroGOF::rmse(sim, obs), 
+  #                             volE = hydroGOF::VE(sim, obs))
   
   if(writeWYstats == TRUE)
   {
