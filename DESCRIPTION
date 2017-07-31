@@ -1,0 +1,30 @@
+Package: prmsTools
+Type: Package
+Title: Package of tools for analysis of PRMS model output
+Version: 0.1
+Date: 2017-07-31
+Authors@R: as.person(c(
+    "Colin Penn <cpenn@usgs.gov> [cre, aut]")
+Depends:
+    R (>= 3.3)
+Imports:
+    lubridate,
+    dplyr,
+    reshape2
+Suggests:
+    xtable,
+    knitr,
+    testthat,
+    rmarkdown
+Description: Contains various functions useful for opening and analysing PRMS model output
+License: CC0
+LazyLoad: yes
+LazyData: yes
+VignetteBuilder: knitr
+BuildVignettes: true
+Copyright: This software is in the public domain because it contains materials
+    that originally came from the United States Geological Survey, an agency of
+    the United States Department of Interior. For more information, see the
+    official USGS copyright policy at
+    http://www.usgs.gov/visual-id/credit_usgs.html#copyright
+RoxygenNote: 6.0.1
