@@ -5,8 +5,9 @@
 #' @details Variables and index numbers of the statvar file are determined by the user in the PRMS control file
 #' prior to simulation. This function reads the statvar header with variables and index number, and outputs a \code{dataframe}
 #' with column titles corresponding to the statvar elements
-#' @examples 
-#' exampleData <- read_Statvar(file = data/rghw_Daymet.statvar)
+#' @examples
+#' \dontrun{
+#' exampleData <- read_Statvar(file = data/rghw_Daymet.statvar)}
 #' @seealso \code{\link[prmsTools]{calc_WYstats}}, 
 #' @export
 #' @return A dataframe containing the statvar output with proper column titles

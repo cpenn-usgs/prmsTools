@@ -3,19 +3,9 @@ Type: Package
 Title: Package of tools for analysis of PRMS model output
 Version: 0.1
 Date: 2017-07-31
-Authors@R: as.person(c(
-    "Colin Penn <cpenn@usgs.gov> [cre, aut]")
+Authors@R: as.person("Colin Penn <cpenn@usgs.gov> [cre, aut]")
 Depends:
     R (>= 3.3)
-Imports:
-    lubridate,
-    dplyr,
-    reshape2
-Suggests:
-    xtable,
-    knitr,
-    testthat,
-    rmarkdown
 Description: Contains various functions useful for opening and analysing PRMS model output
 License: CC0
 LazyLoad: yes

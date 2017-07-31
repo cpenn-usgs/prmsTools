@@ -18,11 +18,7 @@
 #' @importFrom smwrBase waterYear
 #' @importFrom dplyr summarise
 #' @importFrom dplyr group_by
-#' @importFrom hydroGOF NSE
-#' @importFrom hydroGOF rmse
-#' @importFrom hydroGOF VE
 #' @seealso \code{\link[prmsTools]{read_Statvar}}, 
-#' \code{\link[hydroGOF]{NSE}}, \code{\link[hydroGOF]{rmse}}, \code{\link[hydroGOF]{VE}}
 #' @export
 #' @return A dataframe containing goodness-of-fit statistics by water year
 
