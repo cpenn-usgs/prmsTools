@@ -6,6 +6,9 @@ Date: 2017-07-31
 Authors@R: as.person("Colin Penn <cpenn@usgs.gov> [cre, aut]")
 Depends:
     R (>= 3.3)
+Import:
+    dplyr,
+    smwrBase
 Description: Contains various functions useful for opening and analysing PRMS model output
 License: CC0
 LazyLoad: yes

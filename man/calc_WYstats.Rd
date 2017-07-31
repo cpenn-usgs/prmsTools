@@ -25,11 +25,14 @@ A dataframe containing goodness-of-fit statistics by water year
 Function to calculate NSE, RMSE, and VE goodness-of-fit statistics by WY
 }
 \details{
-uses the \code{hydroGOF} package for calculating the following statistics by WY:
+uses documentation in \code{hydroGOF} package for calculating the following statistics by WY:
 
 NSE: Nash-Sutcliffe Efficiency
+
 RMSE: Root Mean Square Error
+
 VE: Volumetric Efficiency
+
 See \code{hydroGOF} package for more documentation and references
 }
 \examples{
@@ -39,5 +42,6 @@ x <- exampleData
 basinStats <- calc_WYstats(data = x, runoffIndex = 6, segOutflowIndex = 9)}
 }
 \seealso{
-\code{\link[prmsTools]{read_Statvar}},
+\code{\link[prmsTools]{read_Statvar}}, \code{\link[hydroGOF]{NSE}},
+\code{\link[hydroGOF]{rmse}}, \code{\link[hydroGOF]{VE}}
 }

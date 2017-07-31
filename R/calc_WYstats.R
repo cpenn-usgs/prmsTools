@@ -5,11 +5,11 @@
 #' @param segOutflowIndex Integer, index number of segment corresponding to observed gage location
 #' @param writeWYstats Logical, if \code{TRUE} write .csv file of WY stats.
 #' @param outFile Character, pathname and filename of .csv file if \code{writeWYstats = TRUE} 
-#' @details uses the \code{hydroGOF} package for calculating the following statistics by WY:
+#' @details uses documentation in \code{hydroGOF} package for calculating the following statistics by WY:
 #' @details NSE: Nash-Sutcliffe Efficiency
-#' RMSE: Root Mean Square Error
-#' VE: Volumetric Efficiency
-#' See \code{hydroGOF} package for more documentation and references
+#' @details RMSE: Root Mean Square Error
+#' @details VE: Volumetric Efficiency
+#' @details See \code{hydroGOF} package for more documentation and references
 #' @examples
 #' \dontrun{
 #' data("exampleData",package="prmsTools")
@@ -18,7 +18,8 @@
 #' @importFrom smwrBase waterYear
 #' @importFrom dplyr summarise
 #' @importFrom dplyr group_by
-#' @seealso \code{\link[prmsTools]{read_Statvar}}, 
+#' @seealso \code{\link[prmsTools]{read_Statvar}}, \code{\link[hydroGOF]{NSE}},
+#' \code{\link[hydroGOF]{rmse}}, \code{\link[hydroGOF]{VE}} 
 #' @export
 #' @return A dataframe containing goodness-of-fit statistics by water year
 
