@@ -7,7 +7,7 @@ Users are encouraged to post any bugs or comments for additional functionality o
 [prmsTools Issues](https://github.com/cpenn-usgs/prmsTools/issues)
 
 ### Description
-This package aids in the importing PRMS model output into the R environment for further analysis, plotting, etc.
+This package aids in importing PRMS model output into the R environment for further analysis, plotting, etc.
 
 ### Installation
 ```R
