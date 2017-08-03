@@ -7,9 +7,10 @@
 #' @details A function for reading in nhru summary output files. Note that in the PRMS control file, nhruOutON_OFF must
 #' be set to 1 for .csv files to be output.
 #' @examples
-#' \dontrun{
 #' exampleData <- read_nhruOut(nhruBaseFileName = "data/rghw_Daymet_nhru_summary_",
-#'                             nhruOutVar_names = c("hru_rain", "hru_snow", nhru = 28))
+#'                             nhruOutVar_names = c("hru_rain", "hru_snow", 
+#'                             nhru = 28))
+#' rain <- exampleData$hru_rain
 #' @export
 #' @return A list of dataframes containing the nhru summary output. List elements are each variable specified in nhruOutVar_names
 
