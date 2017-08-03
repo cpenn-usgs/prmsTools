@@ -2,6 +2,7 @@
 
 export(calc_WYstats)
 export(read_Statvar)
+export(read_nhruOut)
 importFrom(dplyr,group_by)
 importFrom(dplyr,summarise)
 importFrom(smwrBase,waterYear)
