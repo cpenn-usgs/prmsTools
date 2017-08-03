@@ -9,7 +9,7 @@ Depends:
 Import:
     dplyr,
     smwrBase
-Description: Contains various functions useful for opening and analysing PRMS model output
+Description: Contains various functions useful for opening and analyzing PRMS model output
 License: CC0
 LazyLoad: yes
 LazyData: yes
