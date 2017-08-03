@@ -6,10 +6,10 @@ IN DEVELOPMENT. Tools for analysis of PRMS model output.
 Users are encouraged to post any bugs or comments for additional functionality on the issues page at:
 [prmsTools Issues](https://github.com/cpenn-usgs/prmsTools/issues)
 
-## Description
+### Description
 This package aids in the importing PRMS model output into the R environment for further analysis, plotting, etc.
 
-## Installation
+### Installation
 ```R
 install.packages("devtools")
 devtools::install_github(repo = "cpenn-usgs/prmsTools")
@@ -17,7 +17,8 @@ devtools::install_github(repo = "cpenn-usgs/prmsTools")
 # PRMS
 For more information on the US Geological Survey Preciptation-Runoff Modeling System,
 including manuals, examples, and software downloads, please see the USGS Modeling of Watershed Systems website:
-![USGS MoWS](vignetts/mows.png)(https://wwwbrr.cr.usgs.gov/projects/SW_MoWS/PRMS.html)
+
+[![USGS MoWS](vignetts/mows.png)(https://wwwbrr.cr.usgs.gov/projects/SW_MoWS/PRMS.html)]
 
 ## Disclaimer
 This software is in the public domain because it contains materials that originally came from the U.S. Geological Survey, an agency of the United States Department of Interior. For more information, see the [official USGS copyright policy](https://www2.usgs.gov/visual-id/credit_usgs.html#copyright)
@@ -26,5 +27,5 @@ Although this software program has been used by the U.S. Geological Survey (USGS
 
 This software is provided "AS IS."
 
- [
-    ![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)
+ [![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
+ 
