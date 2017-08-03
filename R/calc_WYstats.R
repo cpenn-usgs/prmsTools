@@ -15,7 +15,7 @@
 #' @details VE: Volumetric Efficiency
 #' @details See \code{hydroGOF} package for more documentation and references
 #' @examples
-#' exampleData <- read_Statvar(file = data/rghw_Daymet.statvar)
+#' exampleData <- read_Statvar(file = "data/rghw_Daymet.statvar")
 #' basinStats <- calc_WYstats(data = exampleData, runoffIndex = 6, segOutflowIndex = 9)
 #' @importFrom smwrBase waterYear
 #' @importFrom dplyr summarise
