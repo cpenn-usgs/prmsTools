@@ -10,9 +10,9 @@ calc_WYstats(data, runoffIndex, segOutflowIndex, writeWYstats = FALSE,
 \arguments{
 \item{data}{A \code{dataframe} output from \code{read_Statvar}}
 
-\item{runoffIndex}{Integer, index number of observed gage flow in PRMS input data file}
+\item{runoffIndex}{Integer, index number of observed gage flow in PRMS input data file (and subsequently variable name in statvar file)}
 
-\item{segOutflowIndex}{Integer, index number of segment corresponding to observed gage location}
+\item{segOutflowIndex}{Integer, index number of segment corresponding to observed gage location (and subsequently variable name in statvar file)}
 
 \item{writeWYstats}{Logical, if \code{TRUE} write .csv file of WY stats.}
 
@@ -25,7 +25,12 @@ A dataframe containing goodness-of-fit statistics by water year
 Function to calculate NSE, RMSE, and VE goodness-of-fit statistics by WY
 }
 \details{
-uses documentation in \code{hydroGOF} package for calculating the following statistics by WY:
+Uses gage data and segment data from imported statvar file. Note that segments and runoff data indexes
+must be specified in the control file under statVar_element and statVar_names before PRMS is run,
+and the statvar file read into R using the \code{read_Statvar} function for this function to work best.
+If the data is in another format (ex. pre-formatted table with just obs/sim) it's best just to use the \code{hydroGOF} package
+
+Uses documentation in \code{hydroGOF} package for calculating the following statistics by WY:
 
 NSE: Nash-Sutcliffe Efficiency
 

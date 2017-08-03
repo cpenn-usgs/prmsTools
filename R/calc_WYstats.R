@@ -1,11 +1,15 @@
 #' calc_WYstats
 #' @description Function to calculate NSE, RMSE, and VE goodness-of-fit statistics by WY
 #' @param data A \code{dataframe} output from \code{read_Statvar}
-#' @param runoffIndex Integer, index number of observed gage flow in PRMS input data file
-#' @param segOutflowIndex Integer, index number of segment corresponding to observed gage location
+#' @param runoffIndex Integer, index number of observed gage flow in PRMS input data file (and subsequently variable name in statvar file)
+#' @param segOutflowIndex Integer, index number of segment corresponding to observed gage location (and subsequently variable name in statvar file)
 #' @param writeWYstats Logical, if \code{TRUE} write .csv file of WY stats.
 #' @param outFile Character, pathname and filename of .csv file if \code{writeWYstats = TRUE} 
-#' @details uses documentation in \code{hydroGOF} package for calculating the following statistics by WY:
+#' @details Uses gage data and segment data from imported statvar file. Note that segments and runoff data indexes
+#' must be specified in the control file under statVar_element and statVar_names before PRMS is run,
+#' and the statvar file read into R using the \code{read_Statvar} function for this function to work best.
+#' If the data is in another format (ex. pre-formatted table with just obs/sim) it's best just to use the \code{hydroGOF} package 
+#' @details Uses documentation in \code{hydroGOF} package for calculating the following statistics by WY:
 #' @details NSE: Nash-Sutcliffe Efficiency
 #' @details RMSE: Root Mean Square Error
 #' @details VE: Volumetric Efficiency
