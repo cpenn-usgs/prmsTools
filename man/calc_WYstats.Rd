@@ -41,10 +41,8 @@ VE: Volumetric Efficiency
 See \code{hydroGOF} package for more documentation and references
 }
 \examples{
-\dontrun{
-data("exampleData",package="prmsTools")
-x <- exampleData
-basinStats <- calc_WYstats(data = x, runoffIndex = 6, segOutflowIndex = 9)}
+exampleData <- read_Statvar(file = data/rghw_Daymet.statvar)
+basinStats <- calc_WYstats(data = exampleData, runoffIndex = 6, segOutflowIndex = 9)
 }
 \seealso{
 \code{\link[prmsTools]{read_Statvar}}, \code{\link[hydroGOF]{NSE}},
