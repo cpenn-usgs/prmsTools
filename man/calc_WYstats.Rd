@@ -38,6 +38,8 @@ RMSE: Root Mean Square Error
 
 VE: Volumetric Efficiency
 
+pbias: Percent Bias
+
 See \code{hydroGOF} package for more documentation and references
 }
 \examples{
@@ -46,5 +48,5 @@ basinStats <- calc_WYstats(data = exampleData, runoffIndex = 6, segOutflowIndex 
 }
 \seealso{
 \code{\link[prmsTools]{read_Statvar}}, \code{\link[hydroGOF]{NSE}},
-\code{\link[hydroGOF]{rmse}}, \code{\link[hydroGOF]{VE}}
+\code{\link[hydroGOF]{rmse}}, \code{\link[hydroGOF]{VE}}, \code{\link[hydroGOF]{pbias}}
 }

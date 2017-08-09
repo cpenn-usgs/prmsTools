@@ -13,6 +13,7 @@
 #' @details NSE: Nash-Sutcliffe Efficiency
 #' @details RMSE: Root Mean Square Error
 #' @details VE: Volumetric Efficiency
+#' @details pbias: Percent Bias
 #' @details See \code{hydroGOF} package for more documentation and references
 #' @examples
 #' exampleData <- read_Statvar(file = "data/rghw_Daymet.statvar")
@@ -20,8 +21,12 @@
 #' @importFrom smwrBase waterYear
 #' @importFrom dplyr summarise
 #' @importFrom dplyr group_by
+#' @importFrom hydroGOF NSE 
+#' @importFrom hydroGOF rmse
+#' @importFrom hydroGOF VE 
+#' @importFrom hydroGOF pbias
 #' @seealso \code{\link[prmsTools]{read_Statvar}}, \code{\link[hydroGOF]{NSE}},
-#' \code{\link[hydroGOF]{rmse}}, \code{\link[hydroGOF]{VE}} 
+#' \code{\link[hydroGOF]{rmse}}, \code{\link[hydroGOF]{VE}}, \code{\link[hydroGOF]{pbias}} 
 #' @export
 #' @return A dataframe containing goodness-of-fit statistics by water year
 
@@ -39,14 +44,16 @@ calc_WYstats <- function(data, runoffIndex, segOutflowIndex,
   names(data) <- c("date", "WY", "obs", "sim")
   
   ### calc stats
+  # wystats <- dplyr::summarise(dplyr::group_by(data, WY),
+  #                             nse = 1 - (sum((obs - sim)^2, na.rm = TRUE) / sum((obs - mean(obs, na.rm = TRUE))^2, na.rm = TRUE)),
+  #                             rmse = sqrt(mean((sim - obs)^2, na.rm = TRUE)),
+  #                             volE = 1 - (sum(abs(obs - sim), na.rm = TRUE) / sum(obs, na.rm = TRUE)),
+  #                             pbias = 100 * (sum(sim - obs, na.rm = TRUE) / sum(obs, na.rm = TRUE)))
   wystats <- dplyr::summarise(dplyr::group_by(data, WY),
-                              nse = 1 - ( sum( (obs - sim)^2 ) / sum( (obs - mean(obs, na.rm = TRUE))^2 )),
-                              rmse = sqrt( mean( (sim - obs)^2, na.rm = TRUE) ),
-                              volE = 1 - ( sum( abs(obs - sim) ) / sum( obs ) ))
-  # wystats <- dplyr::summarise(dplyr::group_by(data, WY), 
-  #                             nse = hydroGOF::NSE(sim, obs), 
-  #                             rmse = hydroGOF::rmse(sim, obs), 
-  #                             volE = hydroGOF::VE(sim, obs))
+                              nse = hydroGOF::NSE(sim, obs),
+                              rmse = hydroGOF::rmse(sim, obs),
+                              volE = hydroGOF::VE(sim, obs),
+                              pbias = hydroGOF::pbias(sim, obs))
   
   if(writeWYstats == TRUE)
   {
