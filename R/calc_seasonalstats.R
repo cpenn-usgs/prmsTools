@@ -1,0 +1,68 @@
+#' calc_seasonalstats
+#' @description Function to calculate NSE, RMSE, and VE goodness-of-fit statistics over a period of selected months
+#' @param data A \code{dataframe} output from \code{read_Statvar}
+#' @param seasMonths An array of selected months (numerical format, eg. May is 5)
+#' @param runoffIndex Integer, index number of observed gage flow in PRMS input data file (and subsequently variable name in statvar file)
+#' @param segOutflowIndex Integer, index number of segment corresponding to observed gage location (and subsequently variable name in statvar file)
+#' @param writeWYstats Logical, if \code{TRUE} write .csv file of WY stats.
+#' @param outFile Character, pathname and filename of .csv file if \code{writeWYstats = TRUE} 
+#' @details Uses gage data and segment data from imported statvar file. Note that segments and runoff data indexes
+#' must be specified in the control file under statVar_element and statVar_names before PRMS is run,
+#' and the statvar file read into R using the \code{read_Statvar} function for this function to work best.
+#' If the data is in another format (ex. pre-formatted table with just obs/sim) it's best just to use the \code{hydroGOF} package 
+#' @details Uses documentation in \code{hydroGOF} package for calculating the following statistics by WY:
+#' @details NSE: Nash-Sutcliffe Efficiency
+#' @details RMSE: Root Mean Square Error
+#' @details VE: Volumetric Efficiency
+#' @details pbias: Percent Bias
+#' @details See \code{hydroGOF} package for more documentation and references
+#' @examples
+#' exampleData <- read_Statvar(file = "data/rghw_Daymet.statvar")
+#' apr_sept_Stats <- calc_seasonalstats(data = exampleData, seasMonths = c(4,5,6,7,8,9),
+#' runoffIndex = 6, segOutflowIndex = 9)
+#' @importFrom smwrBase waterYear
+#' @importFrom dplyr summarise
+#' @importFrom dplyr group_by
+#' @importFrom hydroGOF NSE 
+#' @importFrom hydroGOF rmse
+#' @importFrom hydroGOF VE 
+#' @importFrom hydroGOF pbias
+#' @seealso \code{\link[prmsTools]{read_Statvar}}, \code{\link[hydroGOF]{NSE}},
+#' \code{\link[hydroGOF]{rmse}}, \code{\link[hydroGOF]{VE}}, \code{\link[hydroGOF]{pbias}} 
+#' @export
+#' @return A dataframe containing goodness-of-fit statistics by water year
+
+calc_seasonalstats <- function(data, seasMonths, runoffIndex, segOutflowIndex,
+                         writeWYstats = FALSE, outFile = NULL)
+{
+  # add concatinated date and WY
+  data$date <- as.Date(paste(data$year, data$month, data$day, sep = "-"))
+  data$WY <- smwrBase::waterYear(data$date, numeric = TRUE)
+  
+  # extract observed (runoff parameter) and simulated (seg_outflow) data sets
+  data <- data[c("date", "WY", "month",
+                 paste("runoff", runoffIndex, sep = "_"),
+                 paste("seg_outflow", segOutflowIndex, sep = "_"))]
+  names(data) <- c("date", "WY", "month", "obs", "sim")
+  
+  ### calc stats
+  # wystats <- dplyr::summarise(dplyr::group_by(data, WY),
+  #                             nse = 1 - (sum((obs - sim)^2, na.rm = TRUE) / sum((obs - mean(obs, na.rm = TRUE))^2, na.rm = TRUE)),
+  #                             rmse = sqrt(mean((sim - obs)^2, na.rm = TRUE)),
+  #                             volE = 1 - (sum(abs(obs - sim), na.rm = TRUE) / sum(obs, na.rm = TRUE)),
+  #                             pbias = 100 * (sum(sim - obs, na.rm = TRUE) / sum(obs, na.rm = TRUE)))
+  wystats <- dplyr::summarise(dplyr::group_by(dplyr::filter(data, month %in% as.character(seasMonths)), WY),
+                              nse = hydroGOF::NSE(sim, obs),
+                              rmse = hydroGOF::rmse(sim, obs),
+                              volE = hydroGOF::VE(sim, obs),
+                              pbias = hydroGOF::pbias(sim, obs))
+  
+  if(writeWYstats == TRUE)
+  {
+    write.table(x = wystats, file = outFile, quote = FALSE, sep = ",", 
+                row.names = FALSE, col.names = TRUE)
+  }
+  
+  return(wystats)
+  
+}
